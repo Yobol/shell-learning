@@ -1,0 +1,27 @@
+# if setup doesn't need cross platform, please comment 'CROSS_PLATFORM=yes' out.
+CROSS_PLATFORM=yes
+
+PROJECT_NAME="Yobol"
+PROJECT_ROOT="$(cd "$(dirname "$0")/.."; pwd -P)"
+
+# get-sources.sh
+SOURCES_METHOD=local                # clone, local, tarball
+SOURCES_CLONE_URL="https://github.com/ClickHouse/ClickHouse.git"
+SOURCES_BRANCH="master"
+SOURCES_COMMIT=HEAD                 # do checkout of this commit after clone
+
+# prepare-toolchains.sh
+COMPILER=clang                            # gcc, clang
+COMPILER_INSTALL_METHOD=packages          # packages, sources
+COMPILER_PACKAGE_VERSION=10               # or 7 for gcc
+
+# install-libraries.sh
+USE_LLVM_LIBRARIES_FROM_SYSTEM=0          # 0 or 1
+
+# prepare-docker-image-ubuntu.sh
+DOCKER_UBUNTU_REPO=multiarch/ubuntu-core  # https://hub.docker.com/r/multiarch/ubuntu-core/
+DOCKER_UBUNTU_ARCH=arm64                  # How the architecture is named in a tarball at https://partner-images.canonical.com/core/
+DOCKER_UBUNTU_VERSION=bionic              # bionic 为 Ubuntu 18.04.5 LTS 的版本代号，http://releases.ubuntu.com/18.04/
+DOCKER_UBUNTU_QEMU_ARCH=aarch64           # How the architecture is named in https://www.qemu.org/
+DOCKER_UBUNTU_QEMU_VERSION=v5.1.0-7       # https://github.com/multiarch/qemu-user-static/releases
+
