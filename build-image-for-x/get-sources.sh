@@ -14,7 +14,7 @@ if [[ "$SOURCES_METHOD" == "clone" ]]; then
 elif [[ "$SOURCES_METHOD" == "local" ]]; then
     # -f, --force                 remove existing destination files
     # -s, --symbolic              make symbolic links instead of hard links
-    ln -f -s "${PROJECT_ROOT}/${PROJECT_NAME}" "${WORKSPACE}/sources"
+    ln -f -s "${PROJECT_ROOT}/ClickHouse" "${WORKSPACE}/sources"
 else
     die "Unknown SOURCES_METHOD"
 fi

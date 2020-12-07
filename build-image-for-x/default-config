@@ -10,8 +10,8 @@ CROSS_PLATFORM=yes
 
 SCRIPTPATH=$(pwd)
 WORKSPACE=${SCRIPTPATH}/workspace
-PROJECT_NAME="Yobol"
-PROJECT_ROOT="$(cd "$(dirname "$0")/.."; pwd -P)"
+PROJECT_NAME="Yobol"                # turn to the project name what do you want to compile
+PROJECT_ROOT="$(cd "$(dirname "$0")"; pwd -P)"
 
 # get-sources.sh
 SOURCES_METHOD=local                # clone, local, tarball
@@ -20,9 +20,9 @@ SOURCES_BRANCH="master"
 SOURCES_COMMIT=HEAD                 # do checkout of this commit after clone
 
 # prepare-toolchains.sh
-COMPILER=gcc                              # gcc, clang
-COMPILER_INSTALL_METHOD=skip              # packages, sources, skip
-COMPILER_PACKAGE_VERSION=9                # version for compiler
+COMPILER=clang                             # gcc, clang
+COMPILER_INSTALL_METHOD=skip               # (packages), (sources), (skip if you install it in base image)
+COMPILER_PACKAGE_VERSION=10                # version for compiler
 
 # install-compiler-from-sources.sh
 CLANG_SOURCES_BRANCH=trunk          # or tags/RELEASE_600/final
@@ -54,9 +54,7 @@ function die {
     exit ${2:1}
 }
 
-[[ $EUID -ne 0 ]] && SUDO=sudo
-
-./install-os-packages.sh prepare
+# ./install-os-packages.sh prepare
 
 mkdir -p $WORKSPACE
 

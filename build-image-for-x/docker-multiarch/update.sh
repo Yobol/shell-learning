@@ -114,13 +114,13 @@ RUN echo '#!/bin/sh' > /usr/sbin/policy-rc.d \\
 RUN sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
 
 # 参考 https://www.cnblogs.com/gentlemanhai/p/11961326.html
-# 包管理器安装 C Compiler
+# 包管理器安装 C Compiler for building cmake
 RUN apt-get -y update && apt-get install -y software-properties-common
 RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test && apt-get -y update
 RUN apt-get -y install build-essential gcc-9 g++-9 --fix-missing
 # 源码编译安装 C Compiler
 
-# 源码编译安装 CMAKE-3
+# 源码编译安装 cmake-3
 # https://github.com/Kitware/CMake/releases/download/v3.16.1/cmake-3.16.1.tar.gz
 RUN cd ./cmake-3.16.1 \\
     && ./bootstrap CC=gcc-9 CXX=g++-9 -- -DCMAKE_USE_OPENSSL=OFF \\
@@ -132,8 +132,12 @@ RUN cd ./cmake-3.16.1 \\
 RUN apt-get -y install ninja-build --fix-missing
 # 源码编译安裝 Ninja
 # https://github.com/ninja-build/ninja/archive/v1.10.1.zip
-# RUN apt-get -y install python
+RUN apt-get -y install python git
 # RUN cd ./ninja-1.10.1 && ./configure.py --bootstrap && ninja --version
+
+# 包管理器安装 Clang-10
+# https://apt.llvm.org/
+RUN apt-get install -y clang-10 libc++-dev libc++abi-dev
 
 # overwrite this with 'CMD []' in a dependent Dockerfile
 CMD ["/bin/bash"]
